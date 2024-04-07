@@ -11,6 +11,10 @@ The script performs the following operations:
 - Gives the user the option of whether or not they'd want to zip the designated folder. 
 
 
+Notes:
+Script was tested on the Metasploitable VM as a proof of concept.
+
+
 ![1](https://github.com/icon5730/Port_Buster/assets/166230648/80666bb8-eada-49a2-b910-6adc9d2d8eb5)
 ![2](https://github.com/icon5730/Port_Buster/assets/166230648/56817e39-42e5-4a96-b4bb-f9f210757782)
 ![3](https://github.com/icon5730/Port_Buster/assets/166230648/6b932205-4cdc-4c3b-be73-18599dc2d309)

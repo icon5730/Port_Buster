@@ -9,3 +9,11 @@ The script performs the following operations:
 - Gives the user the option to go over the results.
 - Saves the results in a designated and timestamped folder.
 - Gives the user the option of whether or not they'd want to zip the designated folder. 
+
+
+![1](https://github.com/icon5730/Port_Buster/assets/166230648/80666bb8-eada-49a2-b910-6adc9d2d8eb5)
+![2](https://github.com/icon5730/Port_Buster/assets/166230648/56817e39-42e5-4a96-b4bb-f9f210757782)
+![3](https://github.com/icon5730/Port_Buster/assets/166230648/6b932205-4cdc-4c3b-be73-18599dc2d309)
+![4](https://github.com/icon5730/Port_Buster/assets/166230648/7cfc068b-7a5a-418d-8cd8-c3b591466745)
+![5](https://github.com/icon5730/Port_Buster/assets/166230648/67fc44af-edb7-4286-8681-6bd5821faef3)
+![6](https://github.com/icon5730/Port_Buster/assets/166230648/bfdbec8e-5e35-4ac1-bca1-1df5f78eab71)

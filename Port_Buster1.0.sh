@@ -54,7 +54,7 @@ for ip in $(cat .scan | awk '{print $NF}' | grep ^[0-9])
 do
 	
 	echo -e "$yellow[*] Scannning $ip... $endcolor"
-	nmap -F $ip -oN $ip -oX ./HTML_Reports/$ip.xml > /dev/null	 	#Saving a host ip file in the main directory, and an xml file into the HTML)Reports subdirectory
+	nmap -sS -sU -sV $ip -oN $ip -oX ./HTML_Reports/$ip.xml > /dev/null	 	#Saving a host ip file in the main directory, and an xml file into the HTML)Reports subdirectory
 	xsltproc ./HTML_Reports/$ip.xml > ./HTML_Reports/$ip.html		#Converting the xml results into html files
 	rm ./HTML_Reports/$ip.xml						#Removing the xml files
 

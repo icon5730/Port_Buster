@@ -79,7 +79,7 @@ if [ ! -z "$(cat * 2> /dev/null | grep '21/tcp\|22/tcp\|23/tcp\|3389/tcp' )" ]  
         
 
         else 
-        echo -e "\n$red[!] No open ports of vulnerable services found$endcolor\n$cyan[*]$endcolor$red Scan is concluded$endcolor"
+        echo -e "\n$red[!] No open ports of vulnerable services found$endcolor\n$cyan[*]$endcolor$green Scan is concluded$endcolor"
         sleep 1
         conclude
 
@@ -236,7 +236,7 @@ if [ ! -z "$(cat * 2> /dev/null | grep '21/tcp\|22/tcp\|23/tcp\|3389/tcp' )" ]  
         
 
         else 
-        echo -e "\n$red[!] No open ports of vulnerable services found\n$endcolor$cyan[*]$endcolor$red Scan is concluded$endcolor"
+        echo -e "\n$red[!] No open ports of vulnerable services found\n$endcolor$cyan[*]$endcolor$green Scan is concluded$endcolor"
         sleep 1 
         conclude
 
@@ -247,7 +247,7 @@ fi
 
 function brute(){				#Function attempts a Brute Force attack on the target range. Asks the user for a user file, and then gives him the choice between John's password list, and a list provided by the user. Runs attack on the entire range and saves found passwords in a file
 
-
+echo -e "$cyan[*]$endcolor$yellow Your current directory location:$endcolor$red $(pwd)$endcolor"
 read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a user list for the attack to use: $endcolor")" users
 	if [ ! -f $users ]			#Tests to see whether there's actually a file in the path. If there is no file, the user gets a prompt and the function restarts. Otherwise, the user gets a prompt letting him know there is a file there
 	then
@@ -322,7 +322,7 @@ conclude
 
 ;;
 *)
-echo -e "[!] Invalid input. Please choose between [Y/N].\n"	#In case of an invalid input, brute function gets recalled
+echo -e "$red[!] Invalid input. Please choose between [Y/N]\n$endcolor"	#In case of an invalid input, brute function gets recalled
 sleep 0.3
 brute
 ;;

@@ -5,19 +5,28 @@ The script performs the following operations:
 - Asks the user to choose between a "basic" (stealth TCP + UDP port scan, as well as services) or a "full" NMAP scan (scans full port range with services, and includes vulnerability analysis).
 - Scans the given network range and informs the user whether or not vulnerable ports (ftp, ssh, rdp, telnet) or services were located.
 - Generates a CVE file if full scan was chosen and vulnerable services were found by applying Searchsploit on the vulnerabilities.
-- Attempts to brute force vulnerable ports by using Hydra with either the user-given username and password lists, or with a default password list (set to use John the Ripper's list as default).
+- Attempts to Brute Force vulnerable ports by using Hydra with either the user-given username and password lists, or with a default password list (set to use John the Ripper's list as default).
 - Gives the user the option to go over the results.
 - Saves the results in a designated and timestamped folder.
 - Gives the user the option of whether or not they'd want to zip the designated folder. 
 
 
 Notes:
-Script was tested on the Metasploitable VM as a proof of concept.
+Script was tested with Windows Server 2019, and Metasploitable VM's as a proof of concept.
 
+<b>Full Script Run:</b>
 
-![1](https://github.com/icon5730/Port_Buster/assets/166230648/80666bb8-eada-49a2-b910-6adc9d2d8eb5)
-![2](https://github.com/icon5730/Port_Buster/assets/166230648/56817e39-42e5-4a96-b4bb-f9f210757782)
-![3](https://github.com/icon5730/Port_Buster/assets/166230648/6b932205-4cdc-4c3b-be73-18599dc2d309)
-![4](https://github.com/icon5730/Port_Buster/assets/166230648/7cfc068b-7a5a-418d-8cd8-c3b591466745)
-![5](https://github.com/icon5730/Port_Buster/assets/166230648/67fc44af-edb7-4286-8681-6bd5821faef3)
-![6](https://github.com/icon5730/Port_Buster/assets/166230648/bfdbec8e-5e35-4ac1-bca1-1df5f78eab71)
+![1](https://github.com/user-attachments/assets/a96ebead-b726-4cd7-bb0c-d870acd2637c)
+![2](https://github.com/user-attachments/assets/b01dbf19-3423-4444-9f36-12140eba0418)
+![3](https://github.com/user-attachments/assets/bed8c68a-5d1e-4c46-a252-35d1dfd4875e)
+
+<b>Folder Contents:</b>
+
+![4](https://github.com/user-attachments/assets/b3c745ff-0809-4762-821f-dc04d5539cb1)
+![5](https://github.com/user-attachments/assets/54f26ded-2c04-470f-8b0d-e7ac80cfc0ab)
+![6](https://github.com/user-attachments/assets/56b29f1c-6503-4553-8e1d-4bf7feaa39cd)
+
+<b>Scan File Contents</b>
+
+![7](https://github.com/user-attachments/assets/2f102224-d27e-4bc0-9740-ed1a96a539a2)
+![8](https://github.com/user-attachments/assets/350cfffd-5069-4d43-8d7e-46239d1ac41f)

@@ -2,7 +2,7 @@ A Bash script designed for automated scanning, vulnerability analysis and creden
 
 The script performs the following operations:
 - Receives a network range from the user and tests whether or not the range is valid.
-- Asks the user to choose between a "basic" (stealth TCP + UDP port scan, as well as services) or a "full" NMAP scan (scans full tcp port range with services, and includes vulnerability analysis).
+- Asks the user to choose between a "basic" (stealth TCP + UDP port scan, as well as services) or a "full" NMAP scan (scans full TCP port range with services, and includes vulnerability analysis).
 - Scans the given network range and informs the user whether or not vulnerable ports and services (ftp, ssh, rdp, telnet) were located.
 - Generates a CVE file if full scan was chosen and vulnerable services were found by applying Searchsploit on the vulnerabilities.
 - Attempts to Brute Force vulnerable ports by using Hydra with either the user-given username and password lists, or with a default password list (set to use John the Ripper's list as default).

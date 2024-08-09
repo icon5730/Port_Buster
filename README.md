@@ -12,7 +12,7 @@ The script performs the following operations:
 
 
 Notes:
-Script was tested with Windows Server 2019, and Metasploitable VM's as a proof of concept.
+Script was tested with Windows Server 2019, and Metasploitable Virtual Machines as a proof of concept.
 
 <b>Full Script Run:</b>
 

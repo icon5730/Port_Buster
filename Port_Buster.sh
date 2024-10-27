@@ -73,8 +73,11 @@ sleep 2
 
 if [ ! -z "$(cat * 2> /dev/null | grep '21/tcp\|22/tcp\|23/tcp\|3389/tcp' )" ]               #Testing whether or not any of the scanned hosts contain open tcp,ssh,rdp o>
         then 
-        echo -e "\n$green[!] Found open ports of vulnerable services$endcolor\n\n$cyan[*]$endcolor$blue Starting Brute Force prtion...$endcolor"
-        sleep 1
+	echo -e "\n$green[!] Found open ports of vulnerable services on the following IP addresses:$endcolor"
+        dir=$(pwd)
+        echo -e "$magenta$(ls -p $dir | grep -v /)$endcolor"
+        echo -e "\n$cyan[*]$endcolor$blue Starting Brute Force portion...$endcolor"
+	sleep 1
         brute
         
 
@@ -106,9 +109,14 @@ read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a specific
 		sleep 0.3
 		cat $host											#Displaying data in a scanned host ip file slected by the user
 		;;
- 
+		h)
+                read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a host IP to display: $endcolor")" host
+                echo -e "$cyan[*]$endcolor$blue Displaying [H]ost results: $endcolor"
+                sleep 0.3
+                cat $host
+                ;; 
 		V)
-		if [ $scan == "F" ]
+		if [ $scan == "F" ] || [ $scan =="f" ] 
 			then 
 			read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please choose the IP CVE file you wish to display: $endcolor")" cve
 			echo -e "$cyan[*]$endcolor$blue Displaying [V]ulnerability CVE Report: $endcolor\n"
@@ -119,7 +127,20 @@ read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a specific
 			echo -e "$red[!] [$endcolor${blue}B$endcolor${red}]asic scan does not employ a Vulnerability Scan. Displaying a vulnerability report impossible$endcolor" 
 
 		fi
+		;;
+		v)
+                if [ $scan == "F" ] || [ $scan =="f" ] 
+                        then 
+                        read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please choose the IP CVE file you wish to display: $endcolor")" cve
+                        echo -e "$cyan[*]$endcolor$blue Displaying [V]ulnerability CVE Report: $endcolor\n"
+                
+                        cat ./CVE_Reports/cve_$cve.txt
+                        sleep 0.3
+                        else
+      
+                   echo -e "$red[!] [$endcolor${blue}B$endcolor${red}]asic scan does not employ a Vulnerability Scan. Displaying a vulnerability report impossible$endcolor" 
 
+                fi
 		;;
 
 		C)
@@ -127,8 +148,12 @@ read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a specific
 		
 		cat Hydra_Results.txt | grep host					#Displaying only the usernames and passwords gathered by the Brute Force out of the file, while also showing the related host ip and port
 		sleep 0.3
-		
-
+		;;
+		c)
+		                echo -e "$cyan[*]$endcolor$blue Displaying [C]redentials gathered: $endcolor\n"
+                  
+                cat Hydra_Results.txt | grep host
+                sleep 0.3
 		;;
 
 		*) echo -e "$red[!] Invalid input. Moving on...$endcolor"
@@ -141,12 +166,106 @@ read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a specific
 				Y)
 				display								#Restarting the function if the user wishes to view a different result
 				;;
-				
+				y)
+				display
+				;;
 				N)
 				echo -e "$cyan[!]$endcolor$blue You chose not to display any other results$endcolor"
 				sleep 0.3
 				;;
+				n)
+                                echo -e "$cyan[!]$endcolor$blue You chose not to display any other results$endcolor"
+                                sleep 0.3
+				;;
+				*)
+				echo -e "$red[!] Invalid input. Moving on...$endcolor"
+				sleep 0.3
+				;;
 
+				esac
+
+
+}
+display
+;;
+y)
+function display(){
+read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a specific [$endcolor${blue}H$endcolor$yellow]ost, a [$endcolor${blue}V$endcolor$yellow]ulnerability, or gathered [$endcolor${blue}C$endcolor$yellow]redentials? $endcolor")" pick
+	case $pick in
+		H)
+		read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a host IP to display: $endcolor")" host
+		echo -e "$cyan[*]$endcolor$blue Displaying [H]ost results: $endcolor"
+		sleep 0.3
+		cat $host											#Displaying data in a scanned host ip file slected by the user
+		;;
+		h)
+                read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a host IP to display: $endcolor")" host
+                echo -e "$cyan[*]$endcolor$blue Displaying [H]ost results: $endcolor"
+                sleep 0.3
+                cat $host
+                ;; 
+		V)
+		if [[ $scan == "F" || $scan == "f" ]] 
+			then 
+			read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please choose the IP CVE file you wish to display: $endcolor")" cve
+			echo -e "$cyan[*]$endcolor$blue Displaying [V]ulnerability CVE Report: $endcolor\n"
+		
+			cat ./CVE_Reports/cve_$cve.txt									#Displaying the cve data file selected by the user
+			sleep 0.3
+			else
+			echo -e "$red[!] [$endcolor${blue}B$endcolor${red}]asic scan does not employ a Vulnerability Scan. Displaying a vulnerability report impossible$endcolor" 
+
+		fi
+		;;
+		v)
+                if [[ $scan == "F" || $scan == "f" ]] 
+                        then 
+                        read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please choose the IP CVE file you wish to display: $endcolor")" cve
+                        echo -e "$cyan[*]$endcolor$blue Displaying [V]ulnerability CVE Report: $endcolor\n"
+                
+                        cat ./CVE_Reports/cve_$cve.txt
+                        sleep 0.3
+                        else
+      
+                   echo -e "$red[!] [$endcolor${blue}B$endcolor${red}]asic scan does not employ a Vulnerability Scan. Displaying a vulnerability report impossible$endcolor" 
+
+                fi
+		;;
+
+		C)
+		echo -e "$cyan[*]$endcolor$blue Displaying [C]redentials gathered: $endcolor\n"
+		
+		cat Hydra_Results.txt | grep host					#Displaying only the usernames and passwords gathered by the Brute Force out of the file, while also showing the related host ip and port
+		sleep 0.3
+		;;
+		c)
+		                echo -e "$cyan[*]$endcolor$blue Displaying [C]redentials gathered: $endcolor\n"
+                  
+                cat Hydra_Results.txt | grep host
+                sleep 0.3
+		;;
+
+		*) echo -e "$red[!] Invalid input. Moving on...$endcolor"
+		sleep 0.3
+		;;
+
+		esac
+		read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a different result? [Y/N] $endcolor")" again
+			case $again in
+				Y)
+				display								#Restarting the function if the user wishes to view a different result
+				;;
+				y)
+				display
+				;;
+				N)
+				echo -e "$cyan[!]$endcolor$blue You chose not to display any other results$endcolor"
+				sleep 0.3
+				;;
+				n)
+                                echo -e "$cyan[!]$endcolor$blue You chose not to display any other results$endcolor"
+                                sleep 0.3
+				;;
 				*)
 				echo -e "$red[!] Invalid input. Moving on...$endcolor"
 				sleep 0.3
@@ -159,11 +278,15 @@ read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Would you like to view a specific
 display
 ;;
 
+
 N)
 echo -e "$cyan[!]$endcolor$blue You have chosen not to display results$endcolor"
 sleep 0.3
 ;;
-
+n)
+echo -e "$cyan[!]$endcolor$blue You have chosen not to display results$endcolor"
+sleep 0.3
+;;
 *)
 echo -e "$red[!] Invalid input. Try again: $endcolor"
 sleep 0.3
@@ -184,12 +307,27 @@ case $zip in
 	echo -e "\n$cyan[*]$endcolor$blue Results folder has been successfully zipped as $endcolor$magenta$zipfile $endcolor\n$cyan[*]$endcolor$yellow Good Bye!$endcolor"
 	exit 1
 	;;
+	y)
+        read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please provide a name for the zipped file: $endcolor")" zipfile
+        echo -e "$cyan[*]$endcolor$blue Zipping results folder as $endcolor$magenta$zipfile$endcolor$blue...$endcolor"
+        
+        zip -r -q $zipfile $folder.$ts
+        sleep 1
+        echo -e "\n$cyan[*]$endcolor$blue Results folder has been successfully zipped as $endcolor$magenta$zipfile $endcolor\n$cyan[*]$endcolor$yellow Good Bye!$endcolor"
+        exit 1
+	;;
 	N)
 	echo -e "$cyan[!]$endcolor$blue You have chosen not to zip the folder$endcolor\n"
 	sleep 0.3
 	echo -e "$green[*] Operations are now officially concluded$endcolor\n$cyan[*]$endcolor$yellow Good Bye!$endcolor"
 	exit 1
 
+	;;
+	n)
+	        echo -e "$cyan[!]$endcolor$blue You have chosen not to zip the folder$endcolor\n"
+        sleep 0.3
+        echo -e "$green[*] Operations are now officially concluded$endcolor\n$cyan[*]$endcolor$yellow Good Bye!$endcolor"
+        exit 1
 	;;
 	*)
 	echo -e "$red[!] Invalid input! Exiting...$endcolor\n"			#If the input is not one of the two choices, the script ends without zipping
@@ -222,16 +360,27 @@ do
 		for y in $(cat $ip | grep -i cve | awk -F / '{print $(NF-0)}' | grep ^[CVE] | cut -d - -f 3 | sort | uniq | sort -n | head -n 10) #For loop to test the output for CVE id's in Searchsploit
 		do
 		searchsploit $y >> ./CVE_Reports/cve_$ip.txt						#Getting the proper CVE's and savinng them in a report inside the CVE_Reports subdirectory
+
 		sleep 0.2
 		done
+
+                if [ ! -f ./CVE_Reports/cve_$ip.txt ]
+                        then
+                        echo -e "$red[!] No CVE was found. CVE report was not generated!$endcolor"
+                fi
+
+
 		sleep 2
 	fi
 done
  
 if [ ! -z "$(cat * 2> /dev/null | grep '21/tcp\|22/tcp\|23/tcp\|3389/tcp' )" ]               #Testing whether or not any of the scanned hosts contain open >
         then 
-        echo -e "\n$green[!] Found open ports of vulnerable services$endcolor\n\n$cyan[*]$endcolor$blue Starting Brute Force portion...$endcolor"
-        sleep 1
+        echo -e "\n$green[!] Found open ports of vulnerable services on the following IP addresses:$endcolor"
+        dir=$(pwd)
+	echo -e "$magenta$(ls -p $dir | grep -v /)$endcolor"
+	echo -e "\n$cyan[*]$endcolor$blue Starting Brute Force portion...$endcolor"
+	sleep 1
         brute
         
 
@@ -247,8 +396,8 @@ fi
 
 function brute(){				#Function attempts a Brute Force attack on the target range. Asks the user for a user file, and then gives him the choice between John's password list, and a list provided by the user. Runs attack on the entire range and saves found passwords in a file
 
-echo -e "$cyan[*]$endcolor$yellow Your current directory location:$endcolor$red $(pwd)$endcolor"
-read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a user list for the attack to use: $endcolor")" users
+echo -e "$cyan[*]$endcolor$yellow Your current directory location:$endcolor$red $dir$endcolor"
+read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a user list file path for the attack to use: $endcolor")" users
 	if [ ! -f $users ]			#Tests to see whether there's actually a file in the path. If there is no file, the user gets a prompt and the function restarts. Otherwise, the user gets a prompt letting him know there is a file there
 	then
 	echo -e "$red[!] path does not contain a file! Please provide a valid list$endcolor"
@@ -268,7 +417,7 @@ case $list in
 Y)
 echo -e "$cyan[*]$endcolor$blue You have chosen to use your own password list$endcolor"
 sleep 0.3
-read -p "$(echo -e "$cyan[?]$endcolor$yellow Please enter a specific password list to use: $endcolor")" passwords
+read -p "$(echo -e "$cyan[?]$endcolor$yellow Please enter a specific password list file path to use: $endcolor")" passwords
         if [ ! -f $passwords ]			#Tests whether or not a file exists in the path, same as with the user list
         then
         echo -e "$red[!] path does not contain a file! Please provide a valid list$endcolor"
@@ -300,7 +449,64 @@ echo -e "\n$cyan[*]$endcolor$yellow Brute Force attack concluded. Results were s
 sleep 1
 conclude
 ;;
+y)
+echo -e "$cyan[*]$endcolor$blue You have chosen to use your own password list$endcolor"
+sleep 0.3
+read -p "$(echo -e "$cyan[?]$endcolor$yellow Please enter a specific password list file path to use: $endcolor")" passwords
+        if [ ! -f $passwords ]			#Tests whether or not a file exists in the path, same as with the user list
+        then
+        echo -e "$red[!] path does not contain a file! Please provide a valid list$endcolor"
+	sleep 0.5
+        brute
+        else 
+        echo -e "$green[!] Path contains a file$endcolor\n"
+	sleep 0.5
+	echo -e "$cyan[*]$endcolor$blue Commencing Brute Force attack...$endcolor\n"
+	sleep 1
+        fi
+
+
+for x in $(ls)
+	do
+	if [ -f $x ]			#Since the filename is also an ip address, as long as a file is found, the Brute Force attack will use the filename as a target
+	then
+	echo -e "$red[+] Attempting Brute Force attack on $endcolor$magenta$x$endcolor$red... $endcolor "
+	hydra -L $users -P $passwords $x ftp -o Hydra_Results.txt > /dev/null 2>> .err		#Runnig a Brute Force attack on all 4 compromised services, throwing the screen output into /dev/null, and the errors into .err (to be deleted later)
+	hydra -L $users -P $passwords $x rdp -o Hydra_Results.txt > /dev/null 2>> .err
+	hydra -L $users -P $passwords $x ssh -o Hydra_Results.txt > /dev/null 2>> .err
+	hydra -L $users -P $passwords $x telnet -o Hydra_Results.txt > /dev/null 2>> .err
+	rm .err				#Deleting the error file, as it serves no more use
+	sleep 0.5
+	fi
+	done
+	
+echo -e "\n$cyan[*]$endcolor$yellow Brute Force attack concluded. Results were saved in$endcolor$green Hydra_Results.txt$endcolor\n"
+sleep 1
+conclude
+
+;;
 N)
+echo -e "$cyan[!]$endcolor$blue You have chosen to use Hydra's default list$endcolor\n"
+hydralist=$(cat /usr/share/john/password.lst)
+for x in $(ls)
+        do
+	if [ -f $x ]								#Same concept as with the user-provided password Brute Force attack
+        then
+        echo -e "$red[+] Attempting Brute Force attack on $endcolor$magenta$x$endcolor$red... $endcolor "
+        hydra -L $users -P $hydralist $x ftp -o Hydra_Results.txt > /dev/null 2>> .err
+	hydra -L $users -P $hydralist $x rdp -o Hydra_Results.txt > /dev/null 2>> .err
+        hydra -L $users -P $hydralist $x ssh -o Hydra_Results.txt > /dev/null 2>> .err
+	hydra -L $users -P $hydralist $x telnet -o Hydra_Results.txt > /dev/null 2>> .err
+	rm .err
+	sleep 0.5
+	fi
+	done
+echo -e "\n$cyan[*]$endcolor$yellow Brute Force attack concluded. Results were saved in$endcolor$green Hydra_Results.txt$endcolor\n"
+sleep 1
+conclude
+
+;;
+n)
 echo -e "$cyan[!]$endcolor$blue You have chosen to use Hydra's default list$endcolor\n"
 hydralist=$(cat /usr/share/john/password.lst)
 for x in $(ls)
@@ -350,9 +556,17 @@ validrange
 echo -e "$cyan[*]$endcolor$blue Running scan on given IP range...$endcolor\n"
 sleep 0.3
 basic
+;;
+b)
+echo -e "$blue[*] [B]asic scan was selected $endcolor"
+sleep 0.3
+read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a network as a scanning target: $endcolor")" target
+sleep 0.3
+validrange 
 
-
-
+echo -e "$cyan[*]$endcolor$blue Running scan on given IP range...$endcolor\n"
+sleep 0.3
+basic
 ;;
 
 F)
@@ -365,8 +579,17 @@ validrange
 echo -e "$cyan[*]$endcolor$blue Running scan on given IP range...$endcolor\n"
 sleep 0.3
 full
+;;
+f)
+echo -e "$red[*] [F]ull scan was selected $endcolor "
+sleep 0.3
+read -p "$(echo -e "\n$cyan[?]$endcolor$yellow Please enter a network as a scanning target: $endcolor")" target
+sleep 0.3
+validrange
 
-
+echo -e "$cyan[*]$endcolor$blue Running scan on given IP range...$endcolor\n"
+sleep 0.3
+full
 ;;
 *)
 echo -e "$red[!]Invalid input. Please restart the script and choose a correct input\n[*] Exiting...$endcolor"		#In case of an invalid input, the script terminates, and the user needs to restart it

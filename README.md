@@ -16,9 +16,9 @@ Script was tested with Windows Server 2019, and Metasploitable Virtual Machines 
 
 <b>Full Script Run:</b>
 
-![1](https://github.com/user-attachments/assets/a96ebead-b726-4cd7-bb0c-d870acd2637c)
-![2](https://github.com/user-attachments/assets/b01dbf19-3423-4444-9f36-12140eba0418)
-![3](https://github.com/user-attachments/assets/bed8c68a-5d1e-4c46-a252-35d1dfd4875e)
+![1](https://github.com/user-attachments/assets/0d39c671-a654-4f0e-bb52-6006e477b3e9)
+![2](https://github.com/user-attachments/assets/b469742f-4240-4488-9bbd-bf563476faeb)
+![3](https://github.com/user-attachments/assets/258adf78-56a5-4049-a87d-08b441768d0c)
 
 <b>Folder Contents:</b>
 
